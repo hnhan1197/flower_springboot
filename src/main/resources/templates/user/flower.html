@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/userLayout}">
+<body>
+
+<div layout:fragment="content">
+    <section class="breadcrumb-section set-bg" data-setbg="/assets/user/img/breadcrumb.png">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text">
+                        <h2>Sản phẩm</h2>
+                        <div class="breadcrumb__option">
+                            <a href="./index.html">Trang chủ</a>
+                            <span>Sản phẩm</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+    <!-- Product Section Begin -->
+    <section class="product spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-7">
+                    <div class="product__discount">
+                        <div class="section-title product__discount__title">
+                            <h2>Sản phẩm</h2>
+                        </div>
+                    </div>
+                    <div class="filter__item">
+                        <div class="row">
+
+                            <div class="col-lg-12 col-md-4">
+                                <div class="filter__found">
+                                    <h6><span th:text="${count}"></span> Sản phẩm tìm thấy</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6 col-sm-6" th:each="item:${flowerPage.content}">
+                            <div class="product__item">
+                                <div class="product__item__pic set-bg" th:attr="data-setbg= @{${item.getPhotosImagePath()}}">
+                                    <ul class="product__item__pic__hover">
+                                        <li><a th:href="@{/FlowerDetail(id=${item.id})}"><i class="fa fa-shopping-cart"></i></a></li>
+                                    </ul>
+                                </div>
+                                <div class="product__item__text">
+                                    <h6><a th:href="@{/FlowerDetail(id=${item.id})}" th:text="${item.flowerName}"></a></h6>
+                                    <h5 th:text="${#numbers.formatDecimal(item.price,3,'POINT',0,'NONE')}+ ' VND'"></h5>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="product__pagination">
+                        <a th:href="@{/Flower(page=0, name = ${name}, category = ${category})}"><i class="fa fa-step-backward"></i></a>
+                        <a th:if="${flowerPage.number > 0}" th:href="@{/Flower(page=${flowerPage.number - 1}, name = ${name}, category = ${category})}"><i class="fa fa-long-arrow-left"></i></a>
+                        <a th:unless="${flowerPage.number > 0}" th:href="@{/Flower(page=0, name = ${name}, category = ${category})}"><i class="fa fa-long-arrow-left"></i></a>
+                        <a th:if="${flowerPage.number < (flowerPage.totalPages - 1)}" th:href="@{/Flower(page=${flowerPage.number + 1}, name = ${name}, category = ${category})}"><i class="fa fa-long-arrow-right"></i></a>
+                        <a th:unless="${flowerPage.number < (flowerPage.totalPages - 1)}" th:href="@{/Flower(page=${flowerPage.totalPages - 1}, name = ${name}, category = ${category})}"><i class="fa fa-long-arrow-right"></i></a>
+                        <a th:href="@{/Flower(page=${flowerPage.totalPages - 1}, name = ${name}, category = ${category})}"><i class="fa fa-step-forward"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+</body>
+
+</html>

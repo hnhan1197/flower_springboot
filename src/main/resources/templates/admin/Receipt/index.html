@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/adminLayout}">
+<body>
+<main id="main" class="main" layout:fragment="content">
+    <div class="pagetitle">
+        <h1>Đơn hàng</h1>
+    </div>
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Quản lý đơn hàng</h5>
+                        <table class="table datatable">
+                            <thead>
+                            <tr>
+                                <th>Số hóa đơn</th>
+                                <th>Ngày xuất</th>
+                                <th>Ngày giao hàng</th>
+                                <th>Người mua hàng</th>
+                                <th>Tổng thanh toán</th>
+                                <th>Hình thức thanh toán</th>
+                                <th>Trạng thái thanh toán</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody style="margin-top: 24px">
+                            <tr th:each="item :${receiptList}">
+                                <td th:text="${item.id}"></td>
+                                <td th:text="${#temporals.format(item.exportDate, 'dd/MM/yyyy')}"></td>
+                                <td th:text="${#temporals.format(item.deliveryDate, 'dd/MM/yyyy')}"></td>
+                                <td th:text="${item.user.firstName}"></td>
+                                <td th:text="${item.totalPayMent}"></td>
+                                <td th:text="${item.paymentMethod}"></td>
+                                <td th:if="${item.paid}==true">Đã thanh toán</td>
+                                <td th:if="${item.paid}==false">Chưa thanh toán</td>
+                                <td>
+                                    <a class="btn btn-primary text-light" th:href="@{/receipt/ReceiptDetail(id=${item.id})}">Chi tiết đơn hàng</a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+</body>
+
+</html>

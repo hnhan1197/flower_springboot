@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/adminLayout}">
+<body>
+<main id="main" class="main" layout:fragment="content">
+    <div class="pagetitle">
+        <h1>Hoa</h1>
+    </div>
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Quản lý hoa</h5>
+                        <a th:href="@{/flower/create}" type="button" class="btn btn-primary">Thêm hoa</a>
+                        <table class="table datatable">
+                            <thead>
+                            <tr>
+                                <th>Mã hoa</th>
+                                <th>Tên hoa</th>
+                                <th>Màu sắc</th>
+                                <th>Ảnh</th>
+                                <th>Đơn vị</th>
+                                <th>Giá tiền</th>
+<!--                                <th>Mô tả</th>-->
+                                <th>Loại hoa</th>
+                                <th>Nhà cung cấp</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody style="margin-top: 24px">
+                            <tr th:each="item :${flowerList}">
+                                <td th:text="${item.id}"></td>
+                                <td th:text="${item.flowerName}"></td>
+                                <td th:text="${item.color}"></td>
+                                <td><img th:src="@{${item.getPhotosImagePath()}}" alt="Ảnh hoa" height="100"/></td>
+<!--                                <td><img src="/assets/admin" alt="Ảnh hoa"/></td>-->
+                                <td th:text="${item.unit}"></td>
+                                <td th:text="${item.price}"></td>
+<!--                                <td th:text="${item.description}"></td>-->
+                                <td th:text="${item.categoryID.categoryName}"></td>
+                                <td th:text="${item.supplierID.supplierName}"></td>
+                                <td>
+                                    <a class="btn btn-primary text-light" th:href="@{/flower/edit(id=${item.id})}">Sửa</a>
+                                    <a class="btn btn-danger text-light" th:href="@{/flower/delete(id=${item.id})}">Xoá</a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+</body>
+
+</html>

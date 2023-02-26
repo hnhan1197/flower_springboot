@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/adminLayout}">
+<body>
+<main id="main" class="main" layout:fragment="content">
+    <div class="pagetitle">
+        <h1>Hoa</h1>
+    </div>
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Quản lý hoa</h5>
+                        <form method="post" th:action="@{/flower/delete}" enctype="multipart/form-data" th:object="${flower}">
+                            <div class="form-group" >
+                                <label for="id">Mã hoa</label>
+                                <input type="text" class="form-control" name="id" id="id" placeholder="Mã hoa" th:value="${flower.id}" readonly>
+                            </div>
+                            <div class="form-group" >
+                                <label for="flowerName">Tên hoa</label>
+                                <input type="text" class="form-control" name="flowerName" id="flowerName" placeholder="Tên hoa" th:value="${flower.flowerName}" readonly>
+                            </div>
+                            <div class="form-group" >
+                                <label for="color">Màu sắc</label>
+                                <input type="text" class="form-control" name="color" id="color" placeholder="Màu sắc" th:value="${flower.color}" readonly>
+                            </div>
+                            <div class="form-group" >
+                                <label for="image">Ảnh hoa</label>
+                                <input type="text" class="form-control" name="image" id="image" placeholder="Màu sắc" th:value="${flower.img}" hidden>
+                                <img id="output" th:src="@{${flower.getPhotosImagePath()}}" style="margin-top: 12px" height="100"/>
+                            </div>
+                            <div class="form-group" >
+                                <label for="unit">Đơn vị tính</label>
+                                <input type="text" class="form-control" name="unit" id="unit" placeholder="Đơn vị tính" th:value="${flower.unit}" readonly>
+                            </div>
+                            <div class="form-group" >
+                                <label for="price">Giá bán</label>
+                                <input type="text" class="form-control" name="price" id="price" placeholder="Giá bán" th:value="${flower.price}" readonly>
+                            </div>
+                            <div class="form-group" >
+                                <label for="description">Số lượng tồn</label>
+                                <input type="text" class="form-control" name="description" id="description" placeholder="Mô tả" th:value="${flower.description}" readonly>
+                            </div>
+                            <div class="form-group" >
+                                <label for="categoryID">Mã loại hoa</label>
+                                <input type="text" class="form-control" name="categoryID" id="categoryID" placeholder="Mã loại hoa" th:value="${flower.categoryID.id}" readonly>
+                            </div>
+                            <div class="form-group" >
+                                <label for="supplierID">Mã nhà cung cấp</label>
+                                <input type="text" class="form-control" name="supplierID" id="supplierID" placeholder="Mã nhà cung cấp" th:value="${flower.supplierID.id}" readonly>
+                            </div>
+                            <a th:href="@{/flower}" class="btn btn-light">Trở về</a>
+                            <button type="submit" class="btn btn-primary">Xóa</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+<script>
+    var loadFile = function(event) {
+        var output = document.getElementById('output');
+        output.src = URL.createObjectURL(event.target.files[0]);
+        output.onload = function() {
+            URL.revokeObjectURL(output.src) // free memory
+        }
+    };
+</script>
+</body>
+
+</html>

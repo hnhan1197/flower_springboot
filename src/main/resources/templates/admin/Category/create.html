@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/adminLayout}">
+<body>
+<main id="main" class="main" layout:fragment="content">
+    <div class="pagetitle">
+        <h1>Loại hoa</h1>
+    </div>
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Quản lý loại hoa</h5>
+                            <form method="post" th:action="@{/category/create}" id="categoryForm">
+                                <div class="form-group" >
+                                    <label for="categoryName">Tên loại hoa</label>
+                                    <input type="text" class="form-control" name="categoryName" id="categoryName" placeholder="Tên loại hoa">
+                                </div>
+                                <a th:href="@{/category}" class="btn btn-light">Trở về</a>
+                                <button type="submit" class="btn btn-primary">Thêm</button>
+                            </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+<script>
+</script>
+</body>
+
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/adminLayout}">
+<body>
+<main id="main" class="main" layout:fragment="content">
+    <div class="pagetitle">
+        <h1>Nhà cung cấp</h1>
+    </div>
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Quản lý nhà cung cấp</h5>
+                        <a th:href="@{/supplier/create}" type="button" class="btn btn-primary">Thêm nhà cung cấp</a>
+                        <table class="table datatable">
+                            <thead>
+                            <tr>
+                                <th>Mã nhà cung cấp</th>
+                                <th>Tên nhà cung cấp</th>
+                                <th>Số điện thoại</th>
+                                <th>Địa chỉ</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody style="margin-top: 24px">
+                            <tr th:each="item :${supplierList}">
+                                <td th:text="${item.id}"></td>
+                                <td th:text="${item.supplierName}"></td>
+                                <td th:text="${item.numPhone}"></td>
+
+                                <td th:text="${item.address}"></td>
+                                <td>
+                                    <a class="btn btn-primary text-light" th:href="@{/supplier/edit(id=${item.id})}">Sửa</a>
+                                    <a class="btn btn-danger text-light" th:href="@{/supplier/delete(id=${item.id})}">Xoá</a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+</body>
+
+</html>

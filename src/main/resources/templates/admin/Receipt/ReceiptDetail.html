@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/adminLayout}">
+<body>
+<main id="main" class="main" layout:fragment="content">
+    <div class="pagetitle">
+        <h1>Đơn hàng</h1>
+    </div>
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Quản lý đơn hàng</h5>
+                        <table class="table datatable">
+                            <thead>
+                            <tr>
+                                <th>Số hóa đơn</th>
+                                <th>Tên hoa</th>
+                                <th>Giá bán</th>
+                                <th>Số lượng</th>
+                            </tr>
+                            </thead>
+                            <tbody style="margin-top: 24px">
+                            <tr th:each="item :${receiptDetailList}">
+                                <td th:text="${item.receiptID.id}"></td>
+                                <td th:text="${item.flower.flowerName}"></td>
+                                <td th:text="${item.price}"></td>
+                                <td th:text="${item.quantity}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+</body>
+
+</html>

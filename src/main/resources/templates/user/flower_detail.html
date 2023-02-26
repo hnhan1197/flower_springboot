@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/userLayout}">
+<body>
+<div layout:fragment="content">
+    <section class="breadcrumb-section set-bg" data-setbg="/assets/user/img/breadcrumb.png">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text">
+                        <h2 th:text="${flower.flowerName}"></h2>
+                        <div class="breadcrumb__option">
+                            <a href="./index.html">Trang chủ</a>
+                            <a href="./index.html">Sản phẩm</a>
+                            <span th:text="${flower.flowerName}"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="product-details spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <div class="product__details__pic">
+                        <div class="product__details__pic__item">
+                            <img class="product__details__pic__item--large"
+                                 th:src="${flower.getPhotosImagePath()}" alt="">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-6">
+                    <div class="product__details__text">
+                        <h3 th:text="${flower.flowerName}"></h3>
+                        <div class="product__details__rating">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-half-o"></i>
+                            <span>(18 lượt đánh giá)</span>
+                        </div>
+                        <div class="product__details__price" th:text="${#numbers.formatDecimal(flower.price,3,'POINT',0,'NONE')}+ ' VND'"></div>
+                        <p th:text="${flower.description}"> </p>
+                        <form action="/user/createCart" method="post">
+                            <div class="product__details__quantity">
+                                <div class="quantity">
+                                    <div class="pro-qty">
+                                        <input name="quantity" type="text" id="quantity" value="1">
+                                    </div>
+                                </div>
+                            </div>
+                            <input hidden type="text" id="id" name="id" th:value="${flower.id}">
+                            <button  class="primary-btn" type="submit" >Thêm vào giỏ hàng</button>
+                        </form>
+                        <ul>
+                            <!--                        <li><b>Số lượng còn lại</b> <span th:text="${flower.inventoryNumber}"></span></li>-->
+                            <li><b>Giao hàng</b> <span>Giao hàng nhanh. <samp> Miễn phí chọn ngày giao
+                                        hàng</samp></span></li>
+                            <li><b>Màu sắc</b> <span th:text="${flower.color}"></span></li>
+                            <li><b>Chia sẻ tại</b>
+                                <div class="share">
+                                    <a href="#"><i class="fa fa-facebook"></i></a>
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                    <a href="#"><i class="fa fa-instagram"></i></a>
+                                    <a href="#"><i class="fa fa-pinterest"></i></a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="product__details__tab">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab"
+                                   aria-selected="true">Mô tả</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tabs-1" role="tabpanel">
+                                <div class="product__details__tab__desc">
+                                    <h6>Thông tin sản phẩm</h6>
+                                    <p>Hoa hồng được mệnh danh là nữ hoàng trong các loài hoa. Thân cây nhỏ, màu xanh
+                                        được chia thành nhiều nhánh, cành. Lá cây hoa hồng có màu xanh thẫm, mỗi nhánh
+                                        cây có có rất nhiều lá đan xen, xung quanh có đường viền hình răng cưa. Gai là
+                                        một đặc điểm dễ thấy nhất của hoa hồng. Gai của hoa hồng nếu bị đâm vào tay sẽ
+                                        khá là đau đấy.</p>
+                                    <p>Đầu mỗi cành cây là một chùm nụ nhỏ xinh nhìn từ xa như những ngọn nến nhỏ được
+                                        bao bọc trong lớp đài hoa xanh. Những cánh hoa mỏng tang như lụa, mềm như nhung,
+                                        màu đỏ thắm. Từng cánh hoa xếp chồng lên nhau từng tầng một, ôm ấp lấy nhụy vàng
+                                        ở bên trong. Hoa hồng có mùi thơm thoang thoảng, dễ chịu. Em có thể hít hà mãi
+                                        không thôi.</p>
+                                    <p>Hoa hồng thu hút biết bao nhiêu là cô ong, chị bướm đến hút mật, rong chơi. Hoa
+                                        hồng kiêu sa giống như một cô công chúa của khu vườn. Nhất là những buổi sáng
+                                        sớm tinh mơ. Em rất thích ngắm hoa hồng buổi sáng. Những giọt sương long lanh
+                                        đọng trên từng cánh hoa hồng khiến cho bông hoa trở nên kiêu sa hơn bao giờ hết.
+                                    </p>
+                                    <p>Nhiều người nói "hoa hồng là biểu tượng của tình yêu" bởi vì vẻ đẹp dịu dàng mà
+                                        kiêu kỳ của nó. Với em, hoa hồng là biểu tượng của tình yêu thương của bà dành
+                                        cho cây cối. Những cánh hoa hồng bà ngắt trang trí trong nhà khiến nhà em đẹp
+                                        hơn biết bao nhiêu. Em rất thích hoa hồng và thường xuyên giúp bà nội tưới nước
+                                        cho cây.</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+</body>
+
+</html>

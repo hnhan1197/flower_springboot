@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>Quản lý hoa </title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+    <!--js format	-->
+    <script src="/assets/admin/js/jquery.js"></script>
+    <script src="/assets/admin/js/jquerymin.js"></script>
+
+    <!-- Favicons -->
+    <link href="/assets/admin/img/favicon.png" rel="icon">
+    <link href="/assets/admin/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+          rel="stylesheet">
+    <!--boostrap-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Vendor CSS Files -->
+    <link href="/assets/admin/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/admin/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/assets/admin/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="/assets/admin/vendor/quill/quill.snow.css" rel="stylesheet">
+    <link href="/assets/admin/vendor/quill/quill.bubble.css" rel="stylesheet">
+    <link href="/assets/admin/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="/assets/admin/vendor/simple-datatables/style.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="/assets/admin/css/style.css" rel="stylesheet">
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js" type="text/javascript"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/additional-methods.js"></script>
+    <style>
+        label.error{
+            color: red;
+            padding-top: 4px;
+        }
+    </style>
+
+</head>
+
+<body>
+<header id="header" class="header fixed-top d-flex align-items-center">
+
+    <div class="d-flex align-items-center justify-content-between">
+        <a href="/admin" class="logo d-flex align-items-center">
+            <img src="/assets/admin/img/logo.png" alt="">
+            <span class="d-none d-lg-block">Flower Shop</span>
+        </a>
+        <i class="bi bi-list toggle-sidebar-btn"></i>
+    </div>
+
+    <div class="search-bar">
+        <form class="search-form d-flex align-items-center" method="POST" action="#">
+            <input type="text" name="query" placeholder="Search" title="Enter search keyword">
+            <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+        </form>
+    </div>
+
+    <nav class="header-nav ms-auto">
+        <ul class="d-flex align-items-center">
+            <li class="nav-item pe-3" sec:authorize="isAuthenticated()">
+                <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+                    <img src="/assets/admin/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+                    <span class="d-none d-md-block ps-2"
+                          th:text="${#authentication.getPrincipal().getFirstName()}"></span>
+                </a>
+            </li>
+            <li>
+                <a href="/logout" class="btn btn-outline-primary" style="margin-right: 20px">Đăng xuất</a>
+            </li>
+        </ul>
+    </nav>
+
+</header>
+
+
+<aside id="sidebar" class="sidebar">
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+
+        <li class="nav-item">
+            <a th:class="${activePage == 'home'} ? 'nav-link' : 'nav-link collapsed'" th:href="@{/admin}">
+                <i class="bi bi-grid"></i>
+                <span>Trang chủ</span>
+            </a>
+        </li>
+        <li class="nav-item ">
+            <a th:class="${activePage == 'category'} ? 'nav-link' : 'nav-link collapsed'" th:href="@{/category}">
+                <i class="bi bi-layout-text-window-reverse"></i>
+                <span>Quản lý loại hoa</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a th:class="${activePage == 'supplier'} ? 'nav-link' : 'nav-link collapsed'" th:href="@{/supplier}">
+                <i class="bi bi-layout-text-window-reverse"></i>
+                <span>Quản lý nhà cung cấp</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a th:class="${activePage == 'flower'} ? 'nav-link' : 'nav-link collapsed'" th:href="@{/flower}">
+                <i class="bi bi-layout-text-window-reverse"></i>
+                <span>Quản lý hoa</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a th:class="${activePage == 'receipt'} ? 'nav-link' : 'nav-link collapsed'" th:href="@{/receipt}">
+                <i class="bi bi-layout-text-window-reverse"></i>
+                <span>Quản lý đơn hàng</span>
+            </a>
+        </li>
+    </ul>
+</aside>
+
+<main layout:fragment="content">
+
+</main>
+
+
+<footer id="footer" class="footer">
+    <div class="copyright">
+        &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+    </div>
+    <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+    </div>
+</footer>
+
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+        class="bi bi-arrow-up-short"></i></a>
+<!-- Vendor JS Files -->
+<script>
+    $().ready(function() {
+        $("#categoryForm").validate({
+            onfocusout: true,
+            onkeyup: true,
+            onclick: true,
+            rules: {
+                "categoryName": {
+                    required: true,
+                },
+            },
+            messages: {
+                "categoryName": {
+                    required: "Vui lòng nhập tên loại hoa",
+                },
+            }
+        });
+    });
+    $().ready(function() {
+        $("#supplierForm").validate({
+            onfocusout: true,
+            onkeyup: true,
+            onclick: true,
+            rules: {
+                "supplierName": {
+                    required: true,
+                },
+            },
+            messages: {
+                "supplierName": {
+                    required: "Vui lòng nhập tên nhà cung cấp",
+                },
+            }
+        });
+    });
+    $().ready(function() {
+        $("#flowerForm").validate({
+            onfocusout: true,
+            onkeyup: true,
+            onclick: true,
+            rules: {
+                "flowerName": {
+                    required: true,
+                },
+                "image": {
+                    required: true,
+                    extension: "jpg|png|jpeg"
+                },
+                "unit": {
+                    required: true,
+                },
+                "price": {
+                    required: true,
+                    number: true
+                },
+                "description": {
+                    required: true,
+                }
+            },
+            messages: {
+                "flowerName": {
+                    required: "Vui lòng nhập tên hoa",
+                },
+                "image": {
+                    required: "Vui lòng tải ảnh lên",
+                    extension: "Ảnh tải lên phải ở định dạng .jpg, .png hoặc .jpeg"
+                },
+                "unit": {
+                    required: "Vui lòng nhập đơn vị"
+                },
+                "price": {
+                    required: "Vui lòng nhập giá hoa",
+                    number: "Giá phải là số"
+                },
+                "description": {
+                    required: "Vui lòng nhập số lượng tồn",
+                }
+            }
+        });
+    });
+</script>
+<script src="/assets/admin/vendor/apexcharts/apexcharts.min.js"></script>
+<script src="/assets/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/admin/vendor/chart.js/chart.min.js"></script>
+<script src="/assets/admin/vendor/echarts/echarts.min.js"></script>
+<script src="/assets/admin/vendor/quill/quill.min.js"></script>
+<script src="/assets/admin/vendor/simple-datatables/simple-datatables.js"></script>
+<script src="/assets/admin/vendor/tinymce/tinymce.min.js"></script>
+<script src="/assets/admin/vendor/php-email-form/validate.js"></script>
+
+<!-- Template Main JS File -->
+<script src="/assets/admin/js/main.js"></script>
+<script src="/assets/admin/js/khuvucs.js"></script>
+<!-- boostap -->
+<script src="https://code.jquery.com/jquery-2.2.3.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+<script>
+    var loadFile = function (event) {
+        var output = document.getElementById('output');
+        output.src = URL.createObjectURL(event.target.files[0]);
+        output.onload = function () {
+            URL.revokeObjectURL(output.src) // free memory
+        }
+        var a = document.getElementById('inp');
+        var b = document.getElementById('image');
+        a.setAttribute('name', 'anh');
+        b.setAttribute('name', "image");
+        a.disabled = true;
+    };
+</script>
+</body>
+
+</html>

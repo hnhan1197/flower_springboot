@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/userLayout}">
+<body>
+<div layout:fragment="content">
+    <section class="breadcrumb-section set-bg" data-setbg="/assets/user/img/breadcrumb.png">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text">
+                        <h2>Thanh toán</h2>
+                        <div class="breadcrumb__option">
+                            <a href="./index.html">Trang chủ</a>
+                            <span>Thanh toán</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+    <!-- Checkout Section Begin -->
+    <section class="checkout spad">
+        <div class="container">
+            <div class="checkout__form">
+                <h4>Thông tin người nhận</h4>
+                <form th:action="@{/user/createReceipt(price=${toUSAtotalCart})}" method="post" id="checkout">
+                    <div class="row">
+                        <div class="col-lg-7 col-md-6">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="checkout__input">
+                                        <p>Tên người nhận<span></span></p>
+                                        <input name="reciverName" type="text" id="reciverName">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="checkout__input">
+                                <p>Lời nhắn<span>*</span></p>
+                                <input name="message" type="text" id="message">
+                            </div>
+                            <div class="checkout__input">
+                                <p>Địa chỉ người nhận<span></span></p>
+                                <input name="address" type="text" placeholder="Street Address" class="checkout__input__add"
+                                       id="address">
+                            </div>
+                            <div class="checkout__input">
+                                <label for="deliveryDate">Thời gian nhận hàng: </label>
+                                <input type="datetime-local" id="deliveryDate" name="deliveryDate">
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="checkout__input">
+                                        <p>Số điện thoại người nhận<span></span></p>
+                                        <input name="phoneNum" type="text" id="phoneNum">
+                                    </div>
+                                </div>
+                            </div>
+                            <!--                            <input hidden type="text" id="id" name="id" th:value="${carts.id}">-->
+
+                        </div>
+
+                        <div class="col-lg-5 col-md-6">
+                            <div class="checkout__order">
+                                <h4>Đơn của bạn</h4>
+                                <div class="checkout__order__products">Tên sản phẩm <span>Giá</span></div>
+                                <ul th:each="item:${carts}">
+                                    <li th:inline="text"> [[${item.flower.flowerName}]]<span th:text="${#numbers.formatDecimal(item.totalPayMent,3,'POINT',0,'NONE')}+ ' VND'"></span></li>
+                                </ul>
+                                <div class="checkout__order__total">Tổng thanh toán <span th:text="${#numbers.formatDecimal(totalCart,3,'POINT',0,'NONE')}+ ' VND'"></span></div>
+                                <p>Chọn phương thức thanh toán.</p>
+                                <div class="checkout__input__checkbox">
+                                    <label for="payment">
+                                        Ship COD
+                                        <input type="radio" id="payment" name="MethodPay" value="cod">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                                <div class="checkout__input__checkbox">
+                                    <label for="paypal">
+                                        Paypal
+                                        <input type="radio" id="paypal" name="MethodPay" value="paypal">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                                <button type="submit" class="site-btn">XÁC NHẬN</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    <th:block layout:fragment="script">
+        <script>
+            $().ready(function() {
+                $("#checkout").validate({
+                    onfocusout: true,
+                    onkeyup: true,
+                    onclick: true,
+                    rules: {
+                        "reciverName": {
+                            required: true,
+                        },
+                        "message": {
+                            required: true
+                        },
+                        "address": {
+                            required: true,
+                        },
+                        "deliveryDate": {
+                            required: true,
+                        },
+                        "phoneNum": {
+                            required: true,
+                        },
+                        "MethodPay": {
+                            required: true,
+                        }
+                    },
+                    messages: {
+                        "reciverName": {
+                            required: "Vui lòng nhập tên người nhận",
+                        },
+                        "message": {
+                            required: "Vui lòng nhập tin nhắn gửi",
+                        },
+                        "address": {
+                            required: "Vui lòng nhập địa chỉ nhận hàng",
+                        },
+                        "deliveryDate": {
+                            required: "Vui lòng chọn ngày giao hàng",
+                        },
+                        "phoneNum": {
+                            required: "Vui lòng nhập số điện thoại người nhận",
+                        },
+                        "MethodPay": {
+                            required: "Vui lòng chọn phương thức thanh toán",
+                        }
+                    }
+                });
+            });
+        </script>
+    </th:block>
+</div>
+</body>
+
+</html>

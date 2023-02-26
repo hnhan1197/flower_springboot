@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/adminLayout}">
+<body>
+<main id="main" class="main" layout:fragment="content">
+    <div class="pagetitle">
+        <h1>Nhà cung cấp</h1>
+    </div>
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Quản lý nhà cung cấp</h5>
+                        <form method="post" th:action="@{/supplier/create}" enctype="multipart/form-data" id="supplierForm">
+                            <div class="form-group" >
+                                <label for="supplierName">Tên nhà cung cấp</label>
+                                <input type="text" class="form-control" name="supplierName" id="supplierName" placeholder="Tên nhà cung cấp">
+                            </div>
+                            <div class="form-group" >
+                                <label for="numPhone">Số điện thoại</label>
+                                <input type="text" class="form-control" name="numPhone" id="numPhone" placeholder="Số điện thoại">
+                            </div>
+                            <div class="form-group" >
+                                <label for="address">Địa chỉ</label>
+                                <input type="text" class="form-control" name="address" id="address" placeholder="Địa chỉ">
+                            </div>
+                            <a th:href="@{/supplier}" class="btn btn-light">Trở về</a>
+                            <button type="submit" class="btn btn-primary">Thêm</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+</body>
+
+</html>
